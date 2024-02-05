@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Budget App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        input, button {
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Budget App</h1>
+
+    <div>
+        <h2>Current Budget</h2>
+        <ul id="budgetList"></ul>
+    </div>
+
+    <div>
+        <h2>Add Expense</h2>
+        <label for="category">Category:</label>
+        <select id="category">
+            <option value="Food">Food</option>
+            <option value="Rent">Rent</option>
+            <option value="Entertainment">Entertainment</option>
+            <option value="Utilities">Utilities</option>
+            <option value="Visit">Visit</option>
+            <option value="Glossary">Glossary</option>
+        </select>
+        
+        <label for="amount">Amount:</label>
+        <input type="number" id="amount">
+        <button onclick="addExpense()">Add Expense</button>
+    </div>
+
+    <div>
+        <h2>Expense List</h2>
+        <ul id="expenseList"></ul>
+    </div>
+
+    <script>
+        const budget = {
+            Food: 0,
+            Rent: 0,
+            Entertainment: 0,
+            Utilities: 0,
+            Visit: 0,
+            Glossary: 0
+        };
+
+        const expenses = [];
+
+        function displayBudget() {
+            const budgetList = document.getElementById('budgetList');
+            budgetList.innerHTML = '';
+
+            for (const category in budget) {
+                const listItem = document.createElement('li');
+                listItem.textContent = `${category}: $${budget[category]}`;
+                budgetList.appendChild(listItem);
+            }
+        }
+
+        function addExpense() {
+            const categoryInput = document.getElementById('category');
+            const amountInput = document.getElementById('amount');
+
+            const category = categoryInput.value;
+            const amount = parseFloat(amountInput.value);
+
+            if (!isNaN(amount) && category in budget) {
+                budget[category] += amount;
+                displayBudget();
+
+                // Add expense to the list
+                const expense = `${category}: $${amount}`;
+                expenses.push(expense);
+                displayExpenses();
+            } else {
+                alert('Invalid input. Please enter a valid category and amount.');
+            }
+
+            // Clear input fields
+            amountInput.value = '';
+        }
+
+        function displayExpenses() {
+            const expenseList = document.getElementById('expenseList');
+            expenseList.innerHTML = '';
+
+            expenses.forEach(expense => {
+                const listItem = document.createElement('li');
+                listItem.textContent = expense;
+                expenseList.appendChild(listItem);
+            });
+        }
+
+        displayBudget();  // Display initial budget
+
+        // You may want to add more features and improve error handling.
+    </script>
+
+</body>
+</html>

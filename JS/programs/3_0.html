@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Word Length Counter</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background: linear-gradient(to right, #3498db, #2ecc71);
+      /* Add more color stops if needed */
+      color: #fff;
+      /* Set text color to white for better readability */
+    }
+
+    #container {
+      width: 80%;
+      max-width: 600px;
+      /* Adjust the max-width as needed */
+      padding: 20px;
+      box-sizing: border-box;
+      text-align: center;
+    }
+
+    textarea,
+    button {
+      margin: 10px 0;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    #result {
+      background: rgba(255, 255, 255, 0.2);
+      /* Semi-transparent white background */
+      padding: 10px;
+      border-radius: 5px;
+      margin-top: 10px;
+      text-align: left;
+      /* Align text to the left within the result box */
+    }
+  </style>
+</head>
+
+<body>
+  <div id="container">
+    <h1>Word Length Counter</h1>
+    <label for="textInput">Enter text:</label>
+    <textarea id="textInput" rows="5" cols="50"></textarea>
+    <br>
+    <button onclick="countWordLengths()">Count Word Lengths</button>
+    <div id="result">Word lengths will be displayed here.</div>
+  </div>
+
+  <script>
+    function countWordLengths() {
+      // Get the text from the textarea
+      var text = document.getElementById('textInput').value;
+
+      // Remove leading and trailing whitespaces
+      text = text.trim();
+
+      // Handle cases where there is no text
+      if (text === '') {
+        document.getElementById('result').innerText = 'Please enter some text.';
+        return;
+      }
+
+      // Split the text into an array of words using whitespace as the delimiter
+      var words = text.split(/\s+/);
+
+      // Map the array to create a string with each word and its length
+      var resultString = words.map(function (word) {
+        return `${word} (${word.length} characters)`;
+      }).join(', ');
+
+      // Display the result string
+      document.getElementById('result').innerText = 'Word lengths: ' + resultString;
+    }
+  </script>
+</body>
+
+</html>

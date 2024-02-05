@@ -1,0 +1,16 @@
+SELECT * FROM classicmodels.customers;
+select * from customers;
+select * from customers limit 3;
+select * from customers where country = 'USA' and city = 'nyc' and customerNumber > 400;
+select * from customers where country = 'USA' or customerNumber > 400;
+select * from customers where country = 'uSA' or country = 'Germany' or country = 'Italy';
+select * from customers where country not in ('usa', 'germany', 'france');
+select * from customers where customerNumber >= 200 and customerNumber <=350;
+select * from customers where customerNumber not between 200 and 350;
+select * from customers where customerName like "mini%";
+select * from customers where customerName like "%co";
+select * from customers where customerName like "%model%";
+select * from customers where customerName like "mini%co.";
+select * from customers where customerName like "__o%";
+select * from customers where customerName like "%o_";
+select * from customers where city like "_o____";

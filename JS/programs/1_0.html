@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rainbow Calculator</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background: linear-gradient(135deg, #ff0000, #ff9900, #ffea00, #00ff00, #00ffff, #0000ff, #9900ff);
+        }
+
+        #calculator {
+            background-color: #000000;
+            /* Set box background color to black */
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        #display {
+            width: 100%;
+            margin-bottom: 10px;
+            padding: 10px;
+            font-size: 1.5em;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            color: #fff;
+            /* Set text color to white */
+        }
+
+        button {
+            width: 50px;
+            height: 50px;
+            font-size: 1.2em;
+            margin: 5px;
+            border: 1px solid #eee;
+            /* Set light border color */
+            border-radius: 4px;
+            background-color: #3498db;
+            /* Set button color to blue */
+            color: #fff;
+            /* Set text color to white */
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #2980b9;
+            /* Darker blue on hover */
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="calculator">
+        <input type="text" id="display" disabled>
+
+        <div>
+            <button onclick="appendCharacter('1')">1</button>
+            <button onclick="appendCharacter('2')">2</button>
+            <button onclick="appendCharacter('3')">3</button>
+            <button onclick="appendCharacter('+')">+</button>
+            <button onclick="turnOn()">On</button>
+        </div>
+
+        <div>
+            <button onclick="appendCharacter('4')">4</button>
+            <button onclick="appendCharacter('5')">5</button>
+            <button onclick="appendCharacter('6')">6</button>
+            <button onclick="appendCharacter('-')">-</button>
+            <button onclick="turnOff()">Off</button>
+        </div>
+
+        <div>
+            <button onclick="appendCharacter('7')">7</button>
+            <button onclick="appendCharacter('8')">8</button>
+            <button onclick="appendCharacter('9')">9</button>
+            <button onclick="appendCharacter('*')">*</button>
+            <button onclick="removeLastCharacter()">←</button>
+        </div>
+
+        <div>
+            <button onclick="appendCharacter('0')">0</button>
+            <button onclick="appendCharacter('00')">00</button>
+            <button onclick="clearDisplay()">C</button>
+            <button onclick="calculateResult()">=</button>
+            <button onclick="appendCharacter('/')">/</button>
+        </div>
+    </div>
+
+    <script>
+        var calculatorOn = true;
+
+        function appendCharacter(character) {
+            if (calculatorOn) {
+                document.getElementById('display').value += character;
+            }
+        }
+
+        function clearDisplay() {
+            document.getElementById('display').value = '';
+        }
+
+        function calculateResult() {
+            try {
+                document.getElementById('display').value = eval(document.getElementById('display').value);
+                document.getElementById('display').style.color = '#fff'; // Set text color to white
+            } catch (error) {
+                document.getElementById('display').value = 'Error';
+                document.getElementById('display').style.color = 'red'; // Set text color to red for error messages
+            }
+        }
+
+        function removeLastCharacter() {
+            var currentInput = document.getElementById('display').value;
+            document.getElementById('display').value = currentInput.substring(0, currentInput.length - 1);
+        }
+
+        function turnOn() {
+            calculatorOn = true;
+            clearDisplay();
+        }
+
+        function turnOff() {
+            calculatorOn = false;
+            clearDisplay();
+        }
+    </script>
+
+</body>
+
+</html>

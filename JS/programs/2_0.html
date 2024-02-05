@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rainbow Digital Clock with Counter</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background: linear-gradient(45deg, #ff99cc, #ffcc99, #99ffcc, #cc99ff);
+            /* Multi-color gradient background */
+            color: #fff;
+            /* White text color */
+        }
+
+        .clock-container {
+            background-color: #000;
+            /* Black box background color */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+            text-align: center;
+            border: 2px solid #fff;
+            /* White border */
+            margin-bottom: 20px;
+        }
+
+        #clock {
+            font-family: 'Digital-7', sans-serif;
+            /* Use a digital-style font */
+            font-size: 3em;
+            letter-spacing: 8px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, #ff0000, #ff9900, #ffff00, #33cc33, #3399ff, #9933ff);
+            /* Rainbow text */
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+        }
+
+        #date {
+            font-size: 1.5em;
+        }
+
+        .counter-box {
+            background-color: #000;
+            /* Black box background color */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+            text-align: center;
+            border: 2px solid #fff;
+            /* White border */
+        }
+
+        .counter {
+            font-size: 2em;
+            margin-top: 20px;
+        }
+
+        button {
+            margin: 5px;
+            padding: 10px;
+            font-size: 1em;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="clock-container">
+        <div id="clock"></div>
+        <div id="date"></div>
+    </div>
+
+    <div class="counter-box">
+        <div class="counter">Counter: <span id="box2CounterValue">0</span></div>
+        <button onclick="startCounter('box2CounterValue')">Start</button>
+        <button onclick="stopCounter()">Stop</button>
+        <button onclick="resetCounter('box2CounterValue')">Reset</button>
+    </div>
+
+    <script>
+        var box2Counter = 0;
+        var box2IntervalId;
+
+        function updateClock() {
+            var now = new Date();
+            var hours = now.getHours();
+            var ampm = hours >= 12 ? 'PM' : 'AM';
+            hours = hours % 12;
+            hours = hours ? hours : 12; // The hour '0' should be '12'
+            var minutes = now.getMinutes().toString().padStart(2, '0');
+            var seconds = now.getSeconds().toString().padStart(2, '0');
+            var timeString = hours + ':' + minutes + ':' + seconds + ' ' + ampm;
+
+            document.getElementById('clock').textContent = timeString;
+
+            var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            var dateString = now.toLocaleDateString('en-US', options);
+            document.getElementById('date').textContent = dateString;
+        }
+
+        function startCounter(counterId) {
+            if (counterId === 'box2CounterValue') {
+                box2IntervalId = setInterval(function () {
+                    box2Counter++;
+                    document.getElementById(counterId).textContent = box2Counter;
+                }, 1000);
+            }
+        }
+
+        function stopCounter() {
+            clearInterval(box2IntervalId);
+        }
+
+        function resetCounter(counterId) {
+            if (counterId === 'box2CounterValue') {
+                box2Counter = 0;
+                document.getElementById(counterId).textContent = box2Counter;
+                clearInterval(box2IntervalId);
+            }
+        }
+
+        setInterval(updateClock, 1000);
+
+        updateClock();
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vowel Counter</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+            background: linear-gradient(to right, #ff8c00, #ff0080);
+            /* Adjust the color codes as needed */
+        }
+
+        input,
+        button {
+            margin: 10px;
+            padding: 5px;
+        }
+
+        #resultBox {
+            margin-top: 20px;
+            padding: 10px;
+            border: 2px solid #fff;
+            background-color: #fff;
+            color: #333;
+            display: inline-block;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h2>Vowel Counter</h2>
+
+    <label for="inputString">Enter a string:</label>
+    <input type="text" id="inputString">
+    <button onclick="countVowels()">Count Vowels</button>
+
+    <div id="resultBox"></div>
+
+    <script>
+        function countVowels() {
+            // Get the input string from the user
+            const inputString = document.getElementById('inputString').value;
+
+            // Call the countVowels function and display the result
+            const vowelCount = countVowelsInString(inputString);
+
+            // Display the result in the resultBox
+            document.getElementById('resultBox').innerHTML = 'Number of vowels: ' + vowelCount;
+        }
+
+        // Function to count vowels in a string
+        function countVowelsInString(str) {
+            // Convert the string to lowercase to simplify the comparison
+            str = str.toLowerCase();
+
+            let count = 0;
+
+            // Loop through each character in the string
+            for (let i = 0; i < str.length; i++) {
+                const ch = str.charAt(i);
+
+                // Check if the character is a vowel
+                if (ch === 'a' || ch === 'e' || ch === 'i' || ch === 'o' || ch === 'u') {
+                    count++;
+                }
+            }
+
+            return count;
+        }
+    </script>
+
+</body>
+
+</html>
