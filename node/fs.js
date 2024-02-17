@@ -1,4 +1,5 @@
 const fs = require("fs");
+<<<<<<< HEAD
 const { add,product}=require("./basic.js");
 const { log } = require("console");
 
@@ -108,3 +109,17 @@ const { log } = require("console");
 // ------- Synchronously Method -------
 fs.unlinkSync("b.c");
 console.log("deleting an existing file");
+=======
+
+// fs.open('abc.txt',(err, data)=>{
+//     if(err){
+//         console.log('failed to open file');
+//     }
+//     else{
+//         console.log('file open sucessfully');
+//     }
+// })
+
+fs.openSync('abc.txt');
+console.log('file open sucessfully');
+>>>>>>> fbe53aeec4a2c455f053687ede74097598d613fc
