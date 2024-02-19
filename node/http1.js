@@ -1,42 +1,34 @@
 // http Module
 
-const http = require('http');
+const http = require("http");
+const fs = require("fs");
+const data = fs.readFileSync("./HELLO.json","utf-8");
 
-const server = http.createServer((req, res)=> { res.end("Welcome to Local Server  ...."); });
+
+// const server = http.createServer ((req, res)=> {
+// res.setHeader('Dummy', 'Dummy Value');
+// res.setHeader('Content-type', 'text/html');
+// res.setHeader('Content-type', 'application/json');
+// res.end('Welcome to Local Server....');
+// });
+
+
+// const server = http.createServer();
+
+// const server = http.createServer ((req, res)=> {
+//     res.setHeader('Content-type', 'text/html');
+//     res.write('<h1 style="color:red" >Hello</h1>');
+//     res.write('{"hello" :123}');
+//     res.end(data);
+// })
+
+server.on('request', (req, res)=> {
+    console.log(req.url);
+    res.setHeader('Content-type', 'text/html');
+    res.end(data);
+})
 
 server.listen(1234, ()=>{
 
 console.log('Server Start at port 1234');
-});
-
-
-const instagram = http.createServer((req, res)=> { res.end('Welcome to instagarm server ....'); });
-
-instagram.listen(4567, ()=>{
-
-console.log('Server Start at port 4567');
-});
-
-
-const googal = http.createServer((req, res)=> { res.end('Welcome to googal server ....'); });
-
-googal.listen(8910, ()=>{
-
-console.log('Server Start at port 8910');
-});
-
-
-const game = http.createServer((req, res)=> { res.end('Welcome to game Server  ....'); });
-
-game.listen(1112, ()=>{
-
-console.log('Server Start at port 1112');
-});
-
-
-const pubg = http.createServer((req, res)=> { res.end('Welcome to game Server ....'); });
-
-pubg.listen(1314, ()=>{
-
-console.log('Server Start at port 1314');
 });
