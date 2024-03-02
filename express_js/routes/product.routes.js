@@ -1,9 +1,15 @@
 const express = require('express');
-const productroutes = express. Router();
-const { addu
+const productRoutes = express.Router();
+const { addProduct,
+    deleteProduct,
+    getAllProducts,
+    getProduct,
+    replaceProduct,
+    updateProduct
 } = require('../controller/product.controller');
 
 // Create Product
+
 productRoutes.post('/', addProduct);
 
 // Get Single Product
