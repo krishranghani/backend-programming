@@ -9,17 +9,21 @@ async function main(){
     await mongoose.connect('mongodb://127.0.0.1:27017/krish');
 }
 main()
-.then(()=>console.log('DB is connected......'))
-.catch(err => console.log(err));
+    .then(() => console.log('DB is connected......'))
+    .catch(err => console.log(err));
 
 //middleware
 app2.use(express.json());
-app2.use(morgan('dev'));
+app2.use(morgan('dev')); 
 
 
 /****************** PRODUCT ROUTES ***********************/
 // const productRoutes = require('./routes/product.routes');
 // app2.use('/products', productRoutes);
+
+/****************** PRODUCT1 ROUTES **************************/
+const productRoutes = require('./routes/product2.routes');
+app2.use('/api/products', productRoutes);
 
 /****************** USER ROUTES **************************/
 // const userRoutes = require('./routes/user.routes');
@@ -27,11 +31,11 @@ app2.use(morgan('dev'));
 
 /****************** USER form ROUTES *********************/
 
-const userRoutes = require('./routes/userform.routes');
-app2.use('/api/user',userRoutes)
+// const userRoutes = require('./routes/userform.routes');
+// app2.use('/api/user',userRoutes)
 
 
 app2.listen(port, () => {
-console.log(`Server start at http://localhost:1111`);
+    console.log(`Server start at http://localhost:1111`);
 
 }); 

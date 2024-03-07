@@ -1,6 +1,6 @@
 const express = require('express');
 const userRoutes = express.Router();
-const {addUser,
+const { addUser,
     getAllUsers,
     getUser,
     updateUser,
@@ -9,7 +9,7 @@ const {addUser,
 
 
 userRoutes.post('/user-add', addUser);
- 
+
 userRoutes.get('/get-all-users', getAllUsers);
 
 userRoutes.get('/get-user', getUser);
