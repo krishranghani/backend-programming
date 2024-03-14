@@ -44,6 +44,8 @@ const productRoutes = require('./routes/product2.routes');
 app2.use('/api/product',productRoutes);
 const cartRoutes = require('./routes/cart.routes');
 app2.use('/api/cart',cartRoutes);
+const orderRoutes = require('./routes/order.routes');
+app2.use('/api/order',orderRoutes);
 
 
 app2.listen(port, () => {
