@@ -4,7 +4,7 @@ const Cart = require('../model/cart.model');
 exports.newOrder = async (req, res) => {
     try {
         let cartItems = await Cart.find({ user: req.user._id, isDelete: false }).populate('cartItem');
-        // res.send(cartItems);
+        res.send(cartItems);
         let orderItems = cartItems.map(item => ({
             product: item.cartItem._id,
             quantity: item.quantity,
@@ -19,10 +19,21 @@ exports.newOrder = async (req, res) => {
             totalAmount: totalPrice
         });
         newOrder.save();
-        await Cart.updateMany({ user: req.user._id}, {$set: { isDelete: true}});
-        res.status(201).json({ message: `Order Place Successfuly`})
+        await Cart.updateMany({ user: req.user._id }, { $set: { isDelete: true } });
+        res.status(201).json({ message: `Order Place Successfuly` })
     } catch (error) {
         console.log(error);
-        res.status(500).json({ message: `Internal Server Error ${console.error()}`})
+        res.status(500).json({ message: `Internal Server Error` });
     }
+};
+
+exports.getallorders = async( req , res)=>{
+try {
+    let orders =await Order.find({ user :req.user._id, isDelete : false});
+    res.status(200).json(orders);
+    
+} catch (error) {
+    console.log(error);
+    res.status(500).json({ message: `Internal Server Error` });
 }
+};
