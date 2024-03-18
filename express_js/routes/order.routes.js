@@ -1,13 +1,20 @@
 const express = require('express');
-const orderRoutes = express.Router();
+const OrderRoutes = express.Router();
 const { verifyToken } = require('../helpers/verifyToken');
 const {
     newOrder,
-    getOrder
+    getAllOrders,
+    getOrder,
+    deleteOrder
 } = require('../controller/order.controller');
 
-orderRoutes.post('/add-order', verifyToken, newOrder);
+OrderRoutes.post('/add-order', verifyToken, newOrder);
 
-orderRoutes.get('/get-order', verifyToken, getOrder);
+OrderRoutes.get('/getAll-order', verifyToken, getAllOrders);
 
-module.exports = orderRoutes;
+OrderRoutes.get('/get-order', verifyToken, getOrder);
+
+OrderRoutes.delete('/delete-order', verifyToken, deleteOrder);
+
+
+module.exports = OrderRoutes;

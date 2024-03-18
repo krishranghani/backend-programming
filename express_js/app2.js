@@ -4,6 +4,7 @@ const app2 = express();
 const port = process.env.PORT;
 const morgan = require('morgan');
 const mongoose = require('mongoose');
+const path = require('path');
 
 //Database conncetion
 async function main(){
@@ -17,8 +18,11 @@ main()
 .catch(err => console.log(err));
 
 //middleware
+
+let imagepath = path.join(__dirname,'images');
 app2.use(express.json());
 app2.use(morgan('dev')); 
+app2.use('/public/images',express.static(imagepath));
 
 
 /****************** PRODUCT ROUTES ***********************/
@@ -44,8 +48,8 @@ const productRoutes = require('./routes/product2.routes');
 app2.use('/api/product',productRoutes);
 const cartRoutes = require('./routes/cart.routes');
 app2.use('/api/cart',cartRoutes);
-const orderRoutes = require('./routes/order.routes');
-app2.use('/api/order',orderRoutes);
+const OrderRoutes = require('./routes/order.routes');
+app2.use('/api/order',OrderRoutes);
 
 
 app2.listen(port, () => {

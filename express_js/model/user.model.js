@@ -18,13 +18,16 @@ const userSchema = mongoose.Schema({
     age : {
         type : Number
     },
+    profileImage : {
+        type : String
+    },
     isDelete: {
         type: Boolean,
         default: false
     },
     newPassword: {
         type : String
-    }
+    },
 });
 
 module.exports = mongoose.model('users',userSchema);
